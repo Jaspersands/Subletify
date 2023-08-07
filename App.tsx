@@ -1,38 +1,24 @@
-// App.tsx
-import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SafeAreaView } from 'react-native';
 import LoginScreen from './LoginScreen';
+import CreateAccountScreen from './CreateAccountScreen';
+
+const Stack = createStackNavigator();
 
 function App(): JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleLogin = (email: string, password: string) => {
-    // Perform login logic here, e.g., sending the credentials to a server for validation
-    // Once login is successful, set isLoggedIn to true
-    setIsLoggedIn(true);
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      {isLoggedIn ? (
-        <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-          {/* Your main app content here */}
-        </ScrollView>
-      ) : (
-        <LoginScreen onLogin={handleLogin} />
-      )}
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
+          {/* Add more screens here as needed */}
+        </Stack.Navigator>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
 
 export default App;
