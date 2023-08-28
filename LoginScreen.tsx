@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, TouchableWithoutFeedback, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 interface LoginScreenProps {
@@ -23,7 +23,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.logo}>Subletify</Text>
+        <View style={styles.logoContainer}>
+          {/* Display the logo using an Image component */}
+          <Image source={require('./logo.png')} style={styles.logoImage} />
+
+          {/* Display the app name next to the logo */}
+          <Text style={styles.appName}>ubletify</Text>
+        </View>
+
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -61,11 +68,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo: {
-    fontWeight: 'bold',
-    fontSize: 50,
-    color: '#00A86B', // Light greenish color
+  logoContainer: {
+    flexDirection: 'row', // Arrange logo and text horizontally
+    alignItems: 'center', // Center items vertically
     marginBottom: 40,
+  },
+  logoImage: {
+    width: 100, // Set the width as needed
+    height: 100, // Set the height as needed
+  },
+  appName: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    marginLeft: 16, // Adjust spacing as needed
+    color: '#00A86B', // Light greenish color
   },
   inputView: {
     width: '80%',

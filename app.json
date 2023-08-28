@@ -1,4 +1,5 @@
 {
   "name": "Subletify",
-  "displayName": "Subletify"
+  "displayName": "Subletify",
+  "icon": "./test.png"
 }

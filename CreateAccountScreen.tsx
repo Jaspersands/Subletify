@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface CreateAccountScreenProps {
   onCreateAccount: (email: string, password: string) => void;
+  navigation: any; // Navigation prop
 }
 
-function CreateAccountScreen({ onCreateAccount }: CreateAccountScreenProps): JSX.Element {
+function CreateAccountScreen({ onCreateAccount, navigation }: CreateAccountScreenProps): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
@@ -44,7 +45,14 @@ function CreateAccountScreen({ onCreateAccount }: CreateAccountScreenProps): JSX
         onChangeText={setRetypePassword}
         secureTextEntry
       />
-      <Button title="Create Account" onPress={handleCreateAccount} />
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+        <Text style={styles.createAccountButtonText}>Create Account</Text>
+      </TouchableOpacity>
+
+      {/* "Go Back" button */}
+      <TouchableOpacity style={styles.goBackButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.goBackButtonText}>Go Back</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -69,6 +77,30 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
+  },
+  createAccountButton: {
+    backgroundColor: '#00A86B', // Light greenish color
+    borderRadius: 5,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    width: '100%',
+  },
+  createAccountButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  goBackButton: {
+    marginTop: 10,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  goBackButtonText: {
+    fontSize: 16,
+    color: '#00A86B', // Light greenish color
+    //textDecorationLine: 'underline',
   },
 });
 
